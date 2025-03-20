@@ -46,6 +46,17 @@ namespace ServerProjectMvcWithoutView.Repositories
 
         }
 
+        public async Task UpdateQueue(Queue queue){
+        try{
+            var filter = Builders<Queue>.Filter.Eq(q => q.Id, queue.Id);
+
+            var result = await _context.Queues.ReplaceOneAsync(filter, queue);
+            }
+            catch(Exception ex){
+                throw;
+            }
+        }
+
 
     }
 }

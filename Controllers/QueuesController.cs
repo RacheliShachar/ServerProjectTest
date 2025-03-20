@@ -40,5 +40,14 @@ namespace ServerProjectMvcWithoutView.Controllers
            return Ok(await _queuesRepository.GetAllQueues());
         }
 
+        [HttpPut]
+        [SwaggerOperation(Summary = "Update Queue")]
+        public async Task<IActionResult> UpdateQueue([FromBody] Queue queue)
+        {
+           await _queuesRepository.UpdateQueue(queue);
+           return NoContent();
+        }
+
+
     }
 }
