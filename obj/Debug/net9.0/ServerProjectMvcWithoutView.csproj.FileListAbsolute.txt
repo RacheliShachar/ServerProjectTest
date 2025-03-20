@@ -62,3 +62,4 @@ C:\Users\rachels\Desktop\Project\Server\ServerProjectMvcWithoutView\bin\Debug\ne
 C:\Users\rachels\Desktop\Project\Server\ServerProjectMvcWithoutView\obj\Debug\net9.0\ServerPr.ABBE200F.Up2Date
 C:\Users\rachels\Desktop\Project\Server\ServerProjectMvcWithoutView\obj\Debug\net9.0\ServerProjectMvcWithoutView.genruntimeconfig.cache
 C:\Users\rachels\Desktop\Project\Server\ServerProjectMvcWithoutView\obj\Debug\net9.0\ref\ServerProjectMvcWithoutView.dll
+C:\Users\rachels\Desktop\Project\Server\ServerProjectMvcWithoutView\obj\Debug\net9.0\ServerProjectMvcWithoutView.sourcelink.json

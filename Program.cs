@@ -1,36 +1,22 @@
-// var builder = WebApplication.CreateBuilder(args);
-
-// // Add services to the container.
-// builder.Services.AddControllersWithViews();
-
-// var app = builder.Build();
-
-// // Configure the HTTP request pipeline.
-// if (!app.Environment.IsDevelopment())
-// {
-//     app.UseExceptionHandler("/Home/Error");
-// }
-// app.UseRouting();
-
-// app.UseAuthorization();
-
-// app.MapStaticAssets();
-
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Home}/{action=Index}/{id?}")
-//     .WithStaticAssets();
-
-
-// app.Run();
+using ServerProjectMvcWithoutView.Configurations;
 using ServerProjectMvcWithoutView.Data;
 using ServerProjectMvcWithoutView.Repositories;
 using ServerProjectMvcWithoutView.Repositories.Interface;
+using Microsoft.Extensions.Options;
+using ServerProjectMvcWithoutView.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<MyDbContext>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("QueuesManagementDatabase"));
+
+builder.Services.AddScoped<MongoDbContext>(serviceProvider =>
+{
+    var appSettings = serviceProvider.GetRequiredService<IOptions<AppSettings>>().Value;
+        
+    return new MongoDbContext(appSettings);
+});
+
+builder.Services.AddScoped<IQueuesRepository, QueuesRepository>();
 
 // Add services to the container
 builder.Services.AddControllers();
@@ -39,6 +25,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("AllowAngularOrigin");
+
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
@@ -46,9 +34,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.UseAuthorization();
 app.MapControllers();
+
 
 app.Run();
 
